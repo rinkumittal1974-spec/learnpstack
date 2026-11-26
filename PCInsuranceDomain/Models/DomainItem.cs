@@ -11,6 +11,7 @@ public record DomainItem(
     string Name,
     DomainCategory Category,
     string Icon,
+    string Accent,
     string Tagline,
     string Overview,
     IReadOnlyList<string> Responsibilities,
