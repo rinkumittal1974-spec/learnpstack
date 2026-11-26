@@ -18,7 +18,7 @@ public static class DomainCatalog
                 "Is changed over its life through endorsements and is renewed, cancelled, or non-renewed at term end."
             },
             new[] { "Declarations page", "Named insured", "Policy period", "Limit", "Deductible", "Cancellation / non-renewal" },
-            new[] { "coverage", "premium", "endorsement", "claim", "quote", "insured-risk" }),
+            new[] { "coverage", "premium", "endorsement", "claim", "quote", "insured-risk", "policy-lifecycle" }),
 
         new("coverage", "Coverage", BusinessEntity, "shield-check", "green",
             "The specific protections a policy provides and the perils it responds to.",
@@ -30,7 +30,7 @@ public static class DomainCatalog
                 "Forms the basis for deciding whether a reported loss is a covered claim."
             },
             new[] { "Insuring agreement", "Peril", "Exclusion", "Sub-limit", "Coverage line (personal auto, homeowners, commercial property, general liability, workers' comp)" },
-            new[] { "policy", "claim" }),
+            new[] { "policy", "claim", "homeowners", "personal-auto", "commercial-property", "general-liability" }),
 
         new("premium", "Premium", BusinessEntity, "cash-coin", "orange",
             "The price the policyholder pays for coverage, based on how risky the exposure is.",
@@ -42,7 +42,7 @@ public static class DomainCatalog
                 "Is recognized as earned over the policy period, which drives financial reporting."
             },
             new[] { "Rating factors", "Written premium", "Earned premium", "Unearned premium", "Installment billing", "Rate filing" },
-            new[] { "policy", "underwriter", "actuary" }),
+            new[] { "policy", "underwriter", "actuary", "insurance-math" }),
 
         new("claim", "Claim", BusinessEntity, "clipboard-check", "red",
             "A policyholder's request for payment after a covered loss.",
@@ -78,7 +78,7 @@ public static class DomainCatalog
                 "Includes incurred but not reported (IBNR) reserves for losses that have happened but are not yet known to the insurer."
             },
             new[] { "Case reserve", "IBNR", "Loss adjustment expense (LAE)", "Reserve development", "Adequacy" },
-            new[] { "claim", "actuary" }),
+            new[] { "claim", "actuary", "insurance-math" }),
 
         new("endorsement", "Endorsement", BusinessEntity, "pencil-square", "purple",
             "A change made to an existing policy after it is issued.",
@@ -90,7 +90,7 @@ public static class DomainCatalog
                 "Becomes part of the policy record, which is what gets checked when a claim is reported."
             },
             new[] { "Additional insured", "Rider", "Mid-term change", "Pro-rata premium" },
-            new[] { "policy", "premium" }),
+            new[] { "policy", "premium", "policy-lifecycle" }),
 
         new("quote", "Quote", BusinessEntity, "receipt", "blue",
             "The insurer's priced offer of coverage before a policy is bound.",
@@ -102,7 +102,7 @@ public static class DomainCatalog
                 "Becomes a bound policy when the applicant accepts and pays or commits to the first premium."
             },
             new[] { "Application", "Quote validity period", "Bind", "Indication", "Declination", "Subjectivity" },
-            new[] { "policy", "underwriter", "premium" }),
+            new[] { "policy", "underwriter", "premium", "policy-lifecycle" }),
 
         new("insured-risk", "Insured Risk", BusinessEntity, "house-door", "green",
             "The specific property, vehicle, or activity that the policy protects.",
@@ -127,6 +127,147 @@ public static class DomainCatalog
             },
             new[] { "Date of loss", "Cause of loss", "Peril", "Occurrence", "Catastrophe (CAT) event", "Multiple claims per occurrence" },
             new[] { "claim", "coverage", "policy" }),
+
+        new("policy-lifecycle", "Policy Lifecycle", BusinessEntity, "arrow-repeat", "teal",
+            "The path a policy follows from first quote through renewal, cancellation, or lapse.",
+            "The policy lifecycle is the sequence of events in a policy's life. It starts with a quote and an underwriting decision. Coverage is then bound and the policy is issued. During the term the policy is billed, checked, and changed by endorsements. At the end it is renewed, non-renewed, or allowed to lapse, and it can be cancelled early by either side. State law sets many of the rules, especially the notice an insurer must give before it ends coverage. The detail page walks through each step, with diagrams.",
+            new[]
+            {
+                "Defines when coverage starts, changes, and ends, and who has to be told at each point.",
+                "Connects the quote, underwriting, billing, endorsement, and renewal processes into one path.",
+                "Sets the decision points where an insurer can decline, re-rate, cancel, or non-renew a policy."
+            },
+            new[] { "Bind", "Binder", "Declarations page", "Post-bind inspection", "Pro rata", "Short rate", "Notice of cancellation", "Non-renewal", "Lapse", "Reinstatement", "Premium audit" },
+            new[] { "policy", "quote", "underwriter", "endorsement", "premium", "mortgagee-lienholder" }),
+
+        new("insurance-math", "Insurance Math", BusinessEntity, "calculator", "purple",
+            "How insurers measure results, with worked examples of the key ratios and calculations.",
+            "Insurance has its own math because the price is set before the cost is known. An insurer collects premium today and pays claims months or years later. That gap explains most of the key measures. Earned premium shows how much revenue belongs to a period. Incurred losses and reserves estimate the full cost of the claims that belong to it. The combined ratio shows whether underwriting made money, and investment income on the money held in the meantime can turn an underwriting loss into a profit. The detail page works through each idea with simple numbers.",
+            new[]
+            {
+                "Measures underwriting profit through the loss ratio, the expense ratio, and the combined ratio.",
+                "Matches revenue and cost to the right period using earned premium and incurred losses.",
+                "Estimates claims that haven't been reported or settled yet, using reserves and loss development."
+            },
+            new[] { "Written premium", "Earned premium", "Unearned premium reserve", "Incurred losses", "IBNR", "Loss adjustment expense (LAE)", "Loss ratio", "Expense ratio", "Combined ratio", "Float", "Loss development factor", "Coinsurance" },
+            new[] { "premium", "reserve", "actuary", "investors-shareholders", "claim" }),
+
+        // ---------- Lines of business ----------
+        new("homeowners", "Homeowners", LineOfBusiness, "house-heart", "green",
+            "Protects a home, the owner's belongings, and the owner's liability to others.",
+            "Homeowners insurance is a package policy. It covers damage to the house and other structures, the owner's personal belongings, extra living costs while the home is being repaired, and the owner's legal liability if someone is hurt. Most U.S. policies use standard ISO forms or close variations of them. The HO-3 form covers the dwelling against all risks except those excluded, and covers belongings only for listed perils. Flood and earthquake are excluded and must be bought separately. A mortgage lender almost always requires the borrower to carry homeowners coverage.",
+            new[]
+            {
+                "Coverage A, dwelling: the house itself, usually at replacement cost.",
+                "Coverage B, other structures: detached garages, fences, and sheds, often 10% of Coverage A.",
+                "Coverage C, personal property: furniture, clothing, and electronics, with lower sub-limits for jewelry, firearms, and cash.",
+                "Coverage D, loss of use: hotel, meals, and other extra costs while the home can't be lived in.",
+                "Coverage E and F: personal liability and medical payments for injuries to others."
+            },
+            new[] { "HO-3 (special form)", "HO-5 (comprehensive)", "HO-4 (renters)", "HO-6 (condo)", "Open perils", "Named perils", "Replacement cost", "Wind/hail deductible", "Water backup endorsement", "Ordinance or law" },
+            new[] { "flood", "personal-umbrella", "mortgagee-lienholder", "claim-workflow", "restoration-contractor", "insured-risk" }),
+
+        new("personal-auto", "Personal Auto", LineOfBusiness, "car-front", "blue",
+            "Covers drivers for injuries and damage they cause, and for damage to their own car.",
+            "Personal auto is the largest P&C line in the U.S. by premium. Nearly every state requires drivers to carry liability coverage up to a minimum limit, such as 25/50/25. That means $25,000 per injured person, $50,000 per accident for injuries, and $25,000 for property damage. Collision and comprehensive coverages pay to fix the policyholder's own car, and lenders require them on financed vehicles. About a dozen states use a no-fault system, where each driver's own policy pays their medical costs first through personal injury protection (PIP). Pricing depends heavily on the driver, the vehicle, and where it is garaged.",
+            new[]
+            {
+                "Bodily injury and property damage liability for harm the driver causes to others.",
+                "Collision for damage to the insured car from a crash, regardless of fault.",
+                "Comprehensive for theft, hail, flood, fire, glass, and hitting an animal.",
+                "Uninsured and underinsured motorist coverage for injuries caused by a driver with little or no insurance.",
+                "Medical payments or PIP for the insured's own medical bills."
+            },
+            new[] { "Split limits (25/50/25)", "Collision", "Comprehensive", "UM/UIM", "PIP", "No-fault state", "Total loss", "Telematics", "Motor vehicle record (MVR)", "Garaging address" },
+            new[] { "personal-umbrella", "commercial-auto", "third-party-claimant", "claims-adjuster", "insured-risk" }),
+
+        new("personal-umbrella", "Personal Umbrella", LineOfBusiness, "umbrella", "teal",
+            "Extra liability protection above the limits of a home and auto policy.",
+            "A personal umbrella policy adds liability coverage on top of the policyholder's homeowners and auto policies, usually in $1 million layers. It pays only after the underlying policy's limit is used up. A serious car crash or a dog bite can produce a judgment far above standard limits, and an umbrella protects the policyholder's savings and future income from that. Insurers require minimum underlying limits, for example $250,000 per person and $500,000 per accident on auto, and $300,000 on the home policy. Umbrellas also cover some claims the underlying policies don't, such as libel or slander.",
+            new[]
+            {
+                "Pays liability claims after the home or auto policy limit is exhausted.",
+                "Covers some personal injury claims, such as defamation, that underlying policies may exclude.",
+                "Usually pays defense costs in addition to the limit."
+            },
+            new[] { "Excess liability", "Underlying limits", "Self-insured retention", "Drop-down coverage", "Following form" },
+            new[] { "homeowners", "personal-auto", "third-party-claimant" }),
+
+        new("flood", "Flood", LineOfBusiness, "water", "blue",
+            "Covers flood damage, which standard home policies exclude.",
+            "Flood is excluded from standard homeowners and commercial property policies, so it must be bought separately. Most U.S. flood policies are written through the National Flood Insurance Program (NFIP), run by FEMA. Private insurers sell and service NFIP policies under the Write Your Own program, but the federal government carries the risk. The NFIP covers up to $250,000 for a home's structure and $100,000 for its contents. A policy usually takes effect 30 days after purchase, so buyers can't wait until a storm is forecast. Lenders require flood coverage for mortgaged homes in high-risk flood zones. A growing private flood market offers higher limits and extra coverages.",
+            new[]
+            {
+                "Building coverage for the structure, its systems, and built-in appliances.",
+                "Contents coverage for belongings, bought separately.",
+                "Limited coverage in basements, where finished walls and most contents are excluded under the NFIP."
+            },
+            new[] { "NFIP", "Write Your Own (WYO)", "Special Flood Hazard Area", "Flood zone", "Elevation certificate", "30-day waiting period", "Risk Rating 2.0", "Private flood" },
+            new[] { "homeowners", "commercial-property", "mortgagee-lienholder", "regulator" }),
+
+        new("commercial-property", "Commercial Property", LineOfBusiness, "buildings", "orange",
+            "Protects a business's buildings, equipment, and inventory, and its income after a loss.",
+            "Commercial property insurance covers the physical assets of a business and the income it loses when a covered loss shuts it down. A policy is built from a coverage form and a causes-of-loss form. The causes-of-loss form can be basic, broad, or special, which works like the all-risks HO-3. Most policies include a coinsurance clause, which reduces the claim payment if the business insured less than a set share of the property's value. Small businesses often buy property and liability together in a business owners policy (BOP). Large accounts use engineering inspections and are often shared among several insurers.",
+            new[]
+            {
+                "Building coverage for the owned structure and permanent fixtures.",
+                "Business personal property for equipment, furniture, and inventory.",
+                "Business income and extra expense for lost profit and added costs while operations are suspended.",
+                "Optional coverages such as equipment breakdown, spoilage, and ordinance or law."
+            },
+            new[] { "Building and personal property form", "Causes of loss (basic, broad, special)", "Coinsurance", "Agreed value", "Business income", "Extra expense", "Period of restoration", "Business owners policy (BOP)", "Statement of values" },
+            new[] { "general-liability", "flood", "insured-risk", "underwriter", "reinsurer" }),
+
+        new("general-liability", "General Liability", LineOfBusiness, "exclamation-triangle", "red",
+            "Covers a business when its premises, operations, or products hurt someone or damage their property.",
+            "Commercial general liability (CGL) insurance protects a business from lawsuits by people outside the company. Typical claims are a customer slipping in a store, a contractor damaging a client's home, or a defective product causing injury. The standard ISO form has three parts: bodily injury and property damage, personal and advertising injury, and medical payments. Most CGL policies are written on an occurrence basis, so the policy in force when the injury happened responds, even if the lawsuit comes years later. Defense costs are paid in addition to the limits. Limits are commonly $1 million per occurrence and $2 million aggregate.",
+            new[]
+            {
+                "Coverage A: bodily injury and property damage to others caused by the business.",
+                "Coverage B: personal and advertising injury, such as libel, slander, or copyright infringement in advertising.",
+                "Coverage C: medical payments to injured members of the public, regardless of fault.",
+                "Products and completed operations: injury caused by a product or by finished work."
+            },
+            new[] { "Occurrence vs. claims-made", "Per-occurrence limit", "General aggregate", "Products-completed operations", "Additional insured", "Certificate of insurance", "Duty to defend", "Contractual liability" },
+            new[] { "third-party-claimant", "commercial-property", "claims-vendors", "insurance-math" }),
+
+        new("workers-compensation", "Workers' Compensation", LineOfBusiness, "cone-striped", "orange",
+            "Pays medical bills and lost wages for employees hurt on the job, as required by state law.",
+            "Workers' compensation covers employees who are injured or become ill because of their work. Almost every state requires employers to carry it, and Texas is the main exception where it is optional. It is a no-fault system: the injured worker receives benefits without proving the employer was negligent. In return, the worker generally can't sue the employer, which is called the exclusive remedy rule. Each state sets its own benefit levels. The premium is driven by payroll, the job classification of each employee, and the employer's own claim history through an experience modification factor. Four states run monopolistic state funds, where private insurers can't sell the coverage.",
+            new[]
+            {
+                "Part One: the medical, wage-replacement, rehabilitation, and death benefits set by state law.",
+                "Part Two: employer's liability for the rare lawsuits that fall outside the workers' comp system.",
+                "Return-to-work and medical management programs that reduce lost time."
+            },
+            new[] { "Exclusive remedy", "Statutory benefits", "Class code", "Rate per $100 of payroll", "Experience modification (mod)", "Premium audit", "NCCI", "Monopolistic state fund", "Temporary total disability" },
+            new[] { "regulator", "actuary", "claims-adjuster", "insurance-math" }),
+
+        new("commercial-auto", "Commercial Auto", LineOfBusiness, "truck", "indigo",
+            "Covers vehicles a business owns or uses, from a single van to a trucking fleet.",
+            "Commercial auto covers cars, vans, and trucks used for business, along with liability for accidents their drivers cause. It works like personal auto, but coverage is assigned using numbered symbols that define which vehicles are covered. It can also cover hired and non-owned vehicles, such as an employee driving their own car on a work errand. Interstate truckers must meet federal minimum liability limits, and their policies carry the MCS-90 endorsement. The line has had underwriting losses in most years of the past decade, driven by rising repair costs and very large jury verdicts.",
+            new[]
+            {
+                "Liability for injuries and damage caused by business vehicles and drivers.",
+                "Physical damage coverage for the business's own vehicles.",
+                "Hired and non-owned auto coverage for rented vehicles and employees' personal cars used for work.",
+                "Motor carrier filings and endorsements required by federal and state regulators."
+            },
+            new[] { "Covered auto symbols", "Hired and non-owned auto", "Fleet", "MCS-90", "Motor carrier", "Nuclear verdict", "Driver qualification", "Telematics" },
+            new[] { "personal-auto", "general-liability", "third-party-claimant", "regulator" }),
+
+        new("cyber", "Cyber", LineOfBusiness, "laptop", "purple",
+            "Covers the costs of data breaches, ransomware, and other cyber incidents.",
+            "Cyber insurance pays for the costs a business faces after a cyber incident, such as a data breach, a ransomware attack, or a fraudulent funds transfer. First-party coverage pays the business's own costs: forensic investigators, breach notification, data restoration, ransom payments where legal, and lost income while systems are down. Third-party coverage pays for lawsuits and regulatory actions from customers and authorities. Because attacks can hit thousands of companies at once, insurers worry about systemic events and use war and infrastructure exclusions to limit them. Underwriters now require basic controls such as multi-factor authentication, tested backups, and endpoint detection before they offer coverage.",
+            new[]
+            {
+                "Incident response: forensics, legal advice, breach notification, and credit monitoring.",
+                "Cyber extortion and ransomware costs, including negotiation and, where legal, payment.",
+                "Business interruption and data restoration after a network outage.",
+                "Privacy liability and regulatory defense for claims from customers and regulators."
+            },
+            new[] { "First-party vs. third-party", "Ransomware", "Business email compromise", "Breach response panel", "Systemic risk", "War exclusion", "Multi-factor authentication (MFA)", "Sublimit" },
+            new[] { "general-liability", "underwriter", "reinsurer", "claims-vendors" }),
 
         // ---------- Key stakeholders ----------
         new("policyholder", "Policyholder / Insured", Stakeholder, "person-badge", "indigo",
@@ -223,7 +364,7 @@ public static class DomainCatalog
                 "Supports capital planning, reinsurance purchasing, and regulatory filings."
             },
             new[] { "Loss development", "Loss triangle", "Rate adequacy", "IBNR", "Catastrophe model" },
-            new[] { "premium", "reserve", "reinsurer" }),
+            new[] { "premium", "reserve", "reinsurer", "insurance-math" }),
 
         new("third-party-claimant", "Third-Party Claimant", Stakeholder, "person-exclamation", "orange",
             "The injured person or damaged party who is not the policyholder but is owed compensation.",

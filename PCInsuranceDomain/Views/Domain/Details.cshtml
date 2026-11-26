@@ -4,6 +4,7 @@
 @{
     var guide = ProcessGuides.For(Model.Slug);
     var examples = RealWorldExamples.For(Model.Slug);
+    var workedExamples = WorkedExamples.For(Model.Slug);
     var related = Model.RelatedSlugs
         .Select(DomainCatalog.FindBySlug)
         .Where(r => r is not null)
@@ -28,7 +29,7 @@
     <h2 class="h5 mt-4">Overview</h2>
     <p>@Model.Overview</p>
 
-    <h2 class="h5 mt-4">@(Model.Category == DomainCategory.BusinessEntity ? "What it does" : "What they do")</h2>
+    <h2 class="h5 mt-4">@Model.ResponsibilitiesHeading</h2>
     <ul>
         @foreach (var responsibility in Model.Responsibilities)
         {
@@ -81,6 +82,30 @@
                 <p class="text-muted small">@diagram.Caption</p>
                 <div class="diagram-box"><pre class="mermaid">@diagram.MermaidSource</pre></div>
             }
+        }
+    }
+
+    @if (workedExamples.Count > 0)
+    {
+        <h2 class="h5 mt-4">Worked examples</h2>
+        <p class="text-muted small">The numbers are made up to keep the arithmetic simple.</p>
+        foreach (var worked in workedExamples)
+        {
+            <section class="worked-example">
+                <h3 class="h6 mb-1">@worked.Title</h3>
+                <p class="formula small mb-2">@worked.Formula</p>
+                <p>@worked.Scenario</p>
+                <table class="table table-sm mb-2">
+                    <tbody>
+                        @foreach (var line in worked.Lines)
+                        {
+                            <tr><td>@line.Label</td><td class="text-end text-nowrap fw-semibold">@line.Value</td></tr>
+                        }
+                    </tbody>
+                </table>
+                <p class="mb-1"><strong>Answer:</strong> @worked.Answer</p>
+                <p class="text-muted mb-0"><strong>Why it matters:</strong> @worked.Takeaway</p>
+            </section>
         }
     }
 
