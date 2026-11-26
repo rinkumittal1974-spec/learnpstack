@@ -2,6 +2,7 @@
 @using PCInsuranceDomain.Models
 @model DomainItem
 @{
+    var guide = ProcessGuides.For(Model.Slug);
     var examples = RealWorldExamples.For(Model.Slug);
     var related = Model.RelatedSlugs
         .Select(DomainCatalog.FindBySlug)
@@ -43,6 +44,46 @@
         }
     </div>
 
+    @if (guide is not null)
+    {
+        <h2 class="h5 mt-4">Step-by-step process</h2>
+        <p>@guide.Intro</p>
+        var lastPhase = "";
+        var stepNumber = 0;
+        foreach (var step in guide.Steps)
+        {
+            stepNumber++;
+            if (step.Phase != lastPhase)
+            {
+                lastPhase = step.Phase;
+                <h3 class="h6 mt-4 text-uppercase text-muted">@step.Phase</h3>
+            }
+            <div class="process-step">
+                <span class="step-number">@stepNumber</span>
+                <h3 class="h6 mb-1">@step.Title</h3>
+                <p class="small text-muted mb-2"><strong>Who:</strong> @step.Actor &nbsp;|&nbsp; <strong>When:</strong> @step.Timeframe</p>
+                <p>@step.Summary</p>
+                <ul class="mb-0">
+                    @foreach (var detail in step.Details)
+                    {
+                        <li>@detail</li>
+                    }
+                </ul>
+            </div>
+        }
+
+        if (guide.Diagrams.Count > 0)
+        {
+            <h2 class="h5 mt-4">Diagrams</h2>
+            foreach (var diagram in guide.Diagrams)
+            {
+                <h3 class="h6 mt-3">@diagram.Title</h3>
+                <p class="text-muted small">@diagram.Caption</p>
+                <div class="diagram-box"><pre class="mermaid">@diagram.MermaidSource</pre></div>
+            }
+        }
+    }
+
     @if (examples.Count > 0)
     {
         <h2 class="h5 mt-4">Real-world examples</h2>
@@ -65,3 +106,10 @@
         </div>
     }
 </article>
+
+@section Scripts {
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral', flowchart: { useMaxWidth: true } });
+    </script>
+}
