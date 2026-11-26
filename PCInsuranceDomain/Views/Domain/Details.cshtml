@@ -2,6 +2,7 @@
 @using PCInsuranceDomain.Models
 @model DomainItem
 @{
+    var examples = RealWorldExamples.For(Model.Slug);
     var related = Model.RelatedSlugs
         .Select(DomainCatalog.FindBySlug)
         .Where(r => r is not null)
@@ -41,6 +42,17 @@
             <span class="badge rounded-pill text-bg-light border">@term</span>
         }
     </div>
+
+    @if (examples.Count > 0)
+    {
+        <h2 class="h5 mt-4">Real-world examples</h2>
+        <ul class="list-unstyled">
+            @foreach (var example in examples)
+            {
+                <li class="mb-2"><strong>@example.Name</strong><br /><span class="text-muted">@example.Note</span></li>
+            }
+        </ul>
+    }
 
     @if (related.Count > 0)
     {

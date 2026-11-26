@@ -6,6 +6,8 @@ public enum DomainCategory
     Stakeholder
 }
 
+public record RealWorldExample(string Name, string Note);
+
 public record DomainItem(
     string Slug,
     string Name,
