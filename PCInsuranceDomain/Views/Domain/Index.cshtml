@@ -1,8 +1,12 @@
 @using PCInsuranceDomain.Models
 @model IReadOnlyList<DomainItem>
 @{
-    var entities = Model.Where(i => i.Category == DomainCategory.BusinessEntity).ToList();
-    var stakeholders = Model.Where(i => i.Category == DomainCategory.Stakeholder).ToList();
+    var sections = new[]
+    {
+        (Category: DomainCategory.BusinessEntity, Title: "Key Business Entities", Subtitle: "The core objects that the business creates, tracks, and pays."),
+        (Category: DomainCategory.LineOfBusiness, Title: "Lines of Business", Subtitle: "The main kinds of P&C insurance, what each covers, and who buys it."),
+        (Category: DomainCategory.Stakeholder, Title: "Key Stakeholders", Subtitle: "The people and organizations that take part in insurance transactions.")
+    };
 }
 
 <section class="text-center py-4">
@@ -13,32 +17,20 @@
     </p>
 </section>
 
-<h2 class="section-title h4">Key Business Entities</h2>
-<p class="section-subtitle">The core objects that the business creates, tracks, and pays.</p>
-<div class="row g-3">
-    @foreach (var item in entities)
-    {
-        <div class="col-12 col-sm-6 col-lg-4">
-            <a class="domain-tile accent-@item.Accent" asp-controller="Domain" asp-action="Details" asp-route-id="@item.Slug">
-                <div class="tile-icon" aria-hidden="true"><i class="bi bi-@item.Icon"></i></div>
-                <h3 class="tile-name h5">@item.Name</h3>
-                <p class="tile-tagline">@item.Tagline</p>
-            </a>
-        </div>
-    }
-</div>
-
-<h2 class="section-title h4">Key Stakeholders</h2>
-<p class="section-subtitle">The people and organizations that take part in insurance transactions.</p>
-<div class="row g-3">
-    @foreach (var item in stakeholders)
-    {
-        <div class="col-12 col-sm-6 col-lg-4">
-            <a class="domain-tile accent-@item.Accent" asp-controller="Domain" asp-action="Details" asp-route-id="@item.Slug">
-                <div class="tile-icon" aria-hidden="true"><i class="bi bi-@item.Icon"></i></div>
-                <h3 class="tile-name h5">@item.Name</h3>
-                <p class="tile-tagline">@item.Tagline</p>
-            </a>
-        </div>
-    }
-</div>
+@foreach (var group in sections)
+{
+    <h2 class="section-title h4">@group.Title</h2>
+    <p class="section-subtitle">@group.Subtitle</p>
+    <div class="row g-3">
+        @foreach (var item in Model.Where(i => i.Category == group.Category))
+        {
+            <div class="col-12 col-sm-6 col-lg-4">
+                <a class="domain-tile accent-@item.Accent" asp-controller="Domain" asp-action="Details" asp-route-id="@item.Slug">
+                    <div class="tile-icon" aria-hidden="true"><i class="bi bi-@item.Icon"></i></div>
+                    <h3 class="tile-name h5">@item.Name</h3>
+                    <p class="tile-tagline">@item.Tagline</p>
+                </a>
+            </div>
+        }
+    </div>
+}

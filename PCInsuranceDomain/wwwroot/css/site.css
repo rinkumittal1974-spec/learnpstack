@@ -93,3 +93,5 @@ body {
 .step-number { position: absolute; left: 1rem; top: 1rem; width: 2rem; height: 2rem; border-radius: 50%; background: #0d6efd; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9rem; }
 .diagram-box { background: #fff; border: 1px solid #dee2e6; border-radius: 0.75rem; padding: 1rem; overflow-x: auto; margin-bottom: 1.5rem; }
 .diagram-box pre.mermaid { margin: 0; background: transparent; border: 0; }
+.worked-example { background: #fff; border: 1px solid #dee2e6; border-left: 4px solid #6f42c1; border-radius: 0.75rem; padding: 1rem 1.25rem; margin-bottom: 0.75rem; }
+.worked-example .formula { font-family: var(--bs-font-monospace); color: #6f42c1; }

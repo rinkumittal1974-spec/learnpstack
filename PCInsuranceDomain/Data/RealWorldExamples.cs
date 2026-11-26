@@ -169,6 +169,80 @@ public static class RealWorldExamples
             E("Xactimate estimating", "Estimating software used to build line-item repair estimates for property claims."),
             E("Hurricane and hail CAT response", "Catastrophe teams that handle claim surges after large storms, with extended hours and field staff.")
         },
+        ["policy-lifecycle"] = new[]
+        {
+            E("ACORD application forms", "Standard industry forms, such as the ACORD 125 commercial application, that agents use to submit a risk to insurers."),
+            E("Guidewire PolicyCenter and Duck Creek Policy", "Policy administration systems many carriers use to quote, issue, endorse, renew, and cancel policies."),
+            E("California wildfire non-renewal moratoriums", "After major wildfires, California's insurance commissioner has barred insurers from non-renewing homes in nearby ZIP codes for one year."),
+            E("Lender force-placed insurance", "Coverage a mortgage servicer buys when a borrower's policy lapses, usually at a higher price than a regular policy.")
+        },
+        ["insurance-math"] = new[]
+        {
+            E("NAIC Annual Statement, Schedule P", "The statutory filing where every U.S. P&C insurer reports loss development triangles by line of business."),
+            E("Berkshire Hathaway's float", "Warren Buffett's shareholder letters explain how premium held before claims are paid funds investments."),
+            E("AM Best industry reports", "Regular reports on U.S. P&C combined ratios, reserve development, and results by line."),
+            E("Hurricane Andrew (1992)", "Losses far above what insurers expected pushed the industry to adopt catastrophe models for pricing and reinsurance.")
+        },
+        ["homeowners"] = new[]
+        {
+            E("ISO HO 00 03 (HO-3) form", "The standard special-form homeowners policy that most U.S. insurers use or adapt."),
+            E("State Farm", "The largest writer of homeowners insurance in the U.S. by premium."),
+            E("Citizens Property Insurance Corporation", "Florida's state-created insurer of last resort for homeowners who can't find coverage in the private market."),
+            E("California FAIR Plan", "A state-mandated pool that provides basic fire coverage for homes that private insurers won't write.")
+        },
+        ["personal-auto"] = new[]
+        {
+            E("Progressive Snapshot", "A telematics program that prices auto coverage partly on measured driving behavior."),
+            E("State Farm, Progressive, and GEICO", "The three largest U.S. personal auto insurers by premium."),
+            E("Michigan no-fault reform (2019)", "A law that ended mandatory unlimited lifetime medical PIP and let drivers choose lower PIP levels."),
+            E("ISO Personal Auto Policy (PP 00 01)", "The standard personal auto form many insurers base their contracts on.")
+        },
+        ["personal-umbrella"] = new[]
+        {
+            E("Chubb Masterpiece", "A high-net-worth program that packages home, auto, and high-limit excess liability coverage."),
+            E("ISO Personal Umbrella Liability Policy (DL 98 01)", "The standard personal umbrella form available to insurers."),
+            E("Dog-bite liability claims", "One of the largest sources of homeowners liability losses, and a common reason umbrella coverage is triggered.")
+        },
+        ["flood"] = new[]
+        {
+            E("National Flood Insurance Program (NFIP)", "The FEMA-run program that writes most U.S. residential flood policies."),
+            E("Risk Rating 2.0", "The NFIP pricing method rolled out in 2021 and 2022, which prices each home on its own flood risk instead of mainly its flood zone."),
+            E("Hurricane Harvey (2017)", "Most flooded Houston homes had no flood insurance, which showed how wide the flood protection gap is."),
+            E("Neptune Flood", "A private flood insurance provider that offers limits above NFIP caps.")
+        },
+        ["commercial-property"] = new[]
+        {
+            E("ISO CP 00 10 Building and Personal Property Coverage Form", "The standard form that most U.S. commercial property policies build on."),
+            E("FM Global", "A mutual insurer known for covering large \"highly protected\" properties and funding engineering research on loss prevention."),
+            E("COVID-19 business interruption lawsuits", "Most courts ruled the pandemic did not cause the direct physical loss these policies require, so most claims were denied."),
+            E("The Hartford's Spectrum BOP", "A business owners policy that bundles property and liability coverage for small businesses.")
+        },
+        ["general-liability"] = new[]
+        {
+            E("ISO CG 00 01 Commercial General Liability form", "The standard occurrence-based CGL form used across the U.S. market."),
+            E("Certificates of insurance (ACORD 25)", "The form contractors and vendors hand clients to prove they carry liability coverage."),
+            E("Additional insured endorsements in construction", "General contractors require subcontractors to add them as additional insureds on their CGL policies.")
+        },
+        ["workers-compensation"] = new[]
+        {
+            E("NCCI", "The National Council on Compensation Insurance, which manages class codes, loss costs, and experience mods in most states."),
+            E("Monopolistic state funds", "North Dakota, Ohio, Washington, and Wyoming require employers to buy workers' comp from the state fund."),
+            E("State Compensation Insurance Fund (California)", "A state-created insurer that competes with private carriers and is one of the largest workers' comp writers in California."),
+            E("Texas non-subscribers", "Texas lets private employers opt out of workers' comp, so some cover injuries through their own benefit plans instead.")
+        },
+        ["commercial-auto"] = new[]
+        {
+            E("MCS-90 endorsement", "A federally required endorsement that guarantees payment to the public for interstate motor carriers' accidents."),
+            E("Progressive Commercial", "The largest U.S. commercial auto insurer by premium, with a large small-fleet and trucking book."),
+            E("Nuclear verdicts against trucking companies", "Jury awards of $10 million or more in trucking crash cases have pushed up commercial auto rates.")
+        },
+        ["cyber"] = new[]
+        {
+            E("NotPetya (2017)", "A destructive malware attack that led to Merck's long court fight over whether a property policy's war exclusion applied."),
+            E("Lloyd's state-backed attack exclusions", "Since 2023 Lloyd's has required cyber policies to exclude losses from state-backed cyber attacks."),
+            E("Colonial Pipeline ransomware (2021)", "A ransomware attack that shut down a major U.S. fuel pipeline and brought cyber risk to public attention."),
+            E("Coalition", "A cyber insurance provider that pairs coverage with security scanning and alerts for policyholders.")
+        },
         ["restoration-contractor"] = new[]
         {
             E("SERVPRO franchise network", "A franchised water, fire, and mold restoration network that many insurers use for emergency mitigation."),

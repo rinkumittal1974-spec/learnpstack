@@ -270,9 +270,221 @@ public static class ProcessGuides
                 """)
         });
 
+    static readonly ProcessGuide PolicyLifecycle = new(
+        Intro: "This walkthrough follows one homeowners policy from the first quote through its renewal a year later. Auto and commercial policies follow the same path, with a few extra steps noted below. Notice periods and allowed reasons for cancellation are set by each state, so the timeframes here are typical, not universal.",
+        Steps: new[]
+        {
+            new ProcessStep(
+                "Phase 1: Shop and apply",
+                "Request a quote",
+                "Prospective policyholder, with an agent, broker, or the insurer's website",
+                "Minutes to a few days",
+                "The buyer gives basic facts about themselves and the property. The insurer uses those facts, plus outside data, to produce a price for a set of coverages.",
+                new[]
+                {
+                    "The buyer gives the address, year built, square footage, roof age and type, construction, and any past claims.",
+                    "Many insurers prefill property details from third-party property data, so the buyer only confirms or corrects them.",
+                    "The buyer picks coverage limits, a deductible, and optional endorsements such as water backup or scheduled jewelry.",
+                    "A quote is a price offer, not coverage. It is usually valid for 30 to 60 days and can change once the insurer verifies the facts."
+                }),
+            new ProcessStep(
+                "Phase 1: Shop and apply",
+                "Underwriting review",
+                "Underwriter, often helped by automated rules",
+                "Instant for simple risks, days or weeks for complex ones",
+                "The insurer decides whether to accept the risk and at what price. Most personal-lines applications are approved by rules automatically. Unusual ones go to a human underwriter.",
+                new[]
+                {
+                    "Orders reports: claim history (CLUE), a credit-based insurance score where state law allows it, and a motor vehicle record for auto.",
+                    "Checks hazard data such as wildfire, flood zone, wind, hail, and distance to the nearest fire station.",
+                    "Applies eligibility rules. Examples are roof age limits, no prior dog-bite claims, or no unrepaired damage.",
+                    "Approves, declines, or makes a counter-offer, such as a higher deductible or a wind exclusion.",
+                    "Commercial accounts usually go through a broker, who sends the submission to several insurers. Complex risks may need an engineering or loss-control survey."
+                }),
+
+            new ProcessStep(
+                "Phase 2: Bind and issue",
+                "Bind coverage",
+                "Agent with binding authority, or the insurer",
+                "Same day",
+                "Binding is the moment coverage starts. The insurer is now on the risk, even before the full policy document exists.",
+                new[]
+                {
+                    "The buyer signs the application and makes the first payment or down payment.",
+                    "The agent issues a binder, a short temporary contract that proves coverage until the policy is issued.",
+                    "For a home purchase, the lender needs proof of insurance before closing. The agent sends an evidence of insurance form naming the mortgagee.",
+                    "False answers on the application can let the insurer void the policy later, so accuracy at this step matters."
+                }),
+            new ProcessStep(
+                "Phase 2: Bind and issue",
+                "Issue the policy",
+                "Insurer's policy administration system",
+                "Within days to a few weeks of binding",
+                "The insurer produces the formal contract and sends it to the policyholder and to anyone else with an interest in the property.",
+                new[]
+                {
+                    "The declarations page lists the named insured, address, policy period, coverages, limits, deductibles, and premium.",
+                    "The policy forms and endorsements that make up the contract are attached.",
+                    "The mortgagee is listed so claim checks include the lender, and the lender receives renewal and cancellation notices.",
+                    "Auto policies also produce ID cards, which many states require drivers to carry."
+                }),
+
+            new ProcessStep(
+                "Phase 3: During the term",
+                "Billing and payment",
+                "Policyholder, insurer billing team, and sometimes the mortgage servicer",
+                "Throughout the term",
+                "The policyholder pays in full or by installments. Many homeowners pay through an escrow account run by their mortgage servicer.",
+                new[]
+                {
+                    "Pay plans include paid in full, monthly, quarterly, or escrow billing. Installment plans often add a small fee per payment.",
+                    "A missed payment triggers a notice of cancellation for nonpayment. Most states require at least 10 days' notice before coverage ends.",
+                    "If the policyholder pays before the cancellation date, coverage continues. Some insurers also reinstate shortly after, with or without a gap."
+                }),
+            new ProcessStep(
+                "Phase 3: During the term",
+                "Post-bind verification",
+                "Underwriter and inspection vendor",
+                "Usually within the first 60 days",
+                "After binding, the insurer checks that the property matches the application. Problems found here can change the price or end the policy.",
+                new[]
+                {
+                    "An exterior inspection or aerial image checks the roof, hazards such as a trampoline or an unfenced pool, and overall upkeep.",
+                    "If the facts differ, the insurer may re-rate the policy, require repairs by a deadline, or cancel it.",
+                    "Many states let insurers cancel a new policy for almost any reason during the first 60 days. After that, cancellation is limited to specific reasons such as nonpayment or fraud."
+                }),
+            new ProcessStep(
+                "Phase 3: During the term",
+                "Mid-term changes (endorsements)",
+                "Policyholder or agent requests, and the insurer processes",
+                "Any time during the term",
+                "When something changes, the policy is amended by an endorsement instead of being rewritten.",
+                new[]
+                {
+                    "Common changes are adding a car or driver, raising a dwelling limit after a renovation, scheduling new jewelry, or changing the mortgagee after a refinance.",
+                    "The premium is adjusted pro rata. A change halfway through a 12-month term costs or saves half of the annual difference.",
+                    "Each endorsement creates a new version of the declarations page."
+                }),
+            new ProcessStep(
+                "Phase 3: During the term",
+                "Premium audit (commercial policies)",
+                "Premium auditor",
+                "After the policy period ends",
+                "Workers' comp and general liability premiums are based on estimates of payroll or sales. An audit replaces the estimate with the actual figures.",
+                new[]
+                {
+                    "The auditor reviews payroll records, sales, or subcontractor costs for the expired term.",
+                    "If actual exposure was higher than estimated, the insured owes additional premium. If lower, they get a refund.",
+                    "Personal-lines policies, such as homeowners and auto, are not audited."
+                }),
+
+            new ProcessStep(
+                "Phase 4: Ending a policy early",
+                "Cancellation",
+                "Policyholder or insurer",
+                "Any time, with the notice the state requires",
+                "Either side can end a policy before its expiration date. The rules differ depending on who cancels.",
+                new[]
+                {
+                    "Policyholder cancellation: the insured asks to cancel, for example after selling the home. Most insurers refund the unused premium pro rata. Some subtract a short-rate penalty.",
+                    "Insurer cancellation: allowed only for reasons the state permits, such as nonpayment, fraud, material misrepresentation, or a major increase in hazard.",
+                    "The insurer must send written notice to the insured and the mortgagee. Common notice periods are 10 days for nonpayment and 20 to 30 days for other reasons.",
+                    "A mortgaged home without insurance gets force-placed coverage bought by the lender. It is usually more expensive and protects only the lender's interest."
+                }),
+
+            new ProcessStep(
+                "Phase 5: Renewal",
+                "Renewal review",
+                "Underwriter, actuarial rate changes, and automated rules",
+                "60 to 90 days before expiration",
+                "Before the term ends, the insurer decides whether to offer another term and at what price.",
+                new[]
+                {
+                    "New rates filed with the state regulator apply at renewal, so the premium can change even with no claims.",
+                    "Claims during the term, new hazard data, or a fresh inspection can change the price or the terms.",
+                    "Many policies apply inflation guard, which raises the dwelling limit each year to keep up with rebuilding costs.",
+                    "The insurer may offer a conditional renewal, for example with a higher wind deductible or a required roof replacement."
+                }),
+            new ProcessStep(
+                "Phase 5: Renewal",
+                "Renewal offer or non-renewal",
+                "Insurer, then the policyholder",
+                "Notice typically 30 to 60 days before expiration, longer in some states",
+                "The insurer either sends a renewal offer or a notice that it will not renew.",
+                new[]
+                {
+                    "A renewal offer shows the new premium and any changes. Most personal policies renew automatically when the bill is paid.",
+                    "A non-renewal notice must give the reason in many states, and must arrive before a state-set deadline.",
+                    "Some states ban or limit non-renewals after disasters. California, for example, has issued one-year moratoriums in ZIP codes near large wildfires.",
+                    "A homeowner who can't find coverage in the normal market can turn to the state's residual market, such as a FAIR plan or Citizens in Florida."
+                }),
+            new ProcessStep(
+                "Phase 5: Renewal",
+                "Renew, shop, or lapse",
+                "Policyholder and agent",
+                "By the expiration date",
+                "The policyholder accepts the renewal, moves to another insurer, or lets the policy lapse.",
+                new[]
+                {
+                    "If the renewal is paid, a new term starts and the cycle repeats from the billing step.",
+                    "Independent agents often shop the account with other insurers when the price rises sharply.",
+                    "A lapse leaves a gap in coverage. Gaps raise future prices, especially for auto, and a mortgage lender will force-place coverage.",
+                    "Everything that happened during the term, including claims, inspections, and payment history, feeds the next underwriting review."
+                })
+        },
+        Diagrams: new[]
+        {
+            new ProcessDiagram(
+                "Policy lifecycle at a glance",
+                "The main path runs top to bottom. Side branches show where a policy can end early or leave the insurer.",
+                """
+                flowchart TD
+                  A["Quote request"] --> B{"Underwriting review"}
+                  B -- "Declined" --> X["No coverage offered"]
+                  B -- "Approved" --> C["Bind coverage and take first payment"]
+                  C --> D["Issue policy and declarations page"]
+                  D --> E["Policy in force"]
+                  E --> F["Endorsements and mid-term changes"]
+                  F --> E
+                  E --> G{"Post-bind check passed?"}
+                  G -- "No" --> K["Cancellation"]
+                  G -- "Yes" --> H["Renewal review"]
+                  E -- "Missed payment or insured request" --> K
+                  H --> I{"Offer renewal?"}
+                  I -- "No" --> N["Non-renewal notice"]
+                  I -- "Yes" --> J{"Policyholder pays?"}
+                  J -- "Yes" --> E
+                  J -- "No" --> L["Lapse"]
+                  N --> M["Shop other insurers or the residual market"]
+                  L --> M
+                """),
+            new ProcessDiagram(
+                "Policy statuses",
+                "The status a policy record moves through in a policy administration system.",
+                """
+                stateDiagram-v2
+                  [*] --> Quoted
+                  Quoted --> Bound: Application signed and paid
+                  Quoted --> [*]: Quote expires or is declined
+                  Bound --> InForce: Policy issued
+                  InForce --> InForce: Endorsement
+                  InForce --> PendingCancel: Missed payment
+                  PendingCancel --> InForce: Paid before the deadline
+                  PendingCancel --> Cancelled: Notice period ends
+                  InForce --> Cancelled: Insured or insurer cancels
+                  Cancelled --> InForce: Reinstated
+                  InForce --> Renewed: Renewal offer paid
+                  Renewed --> InForce: New term starts
+                  InForce --> Expired: Non-renewed or not paid
+                  Cancelled --> [*]
+                  Expired --> [*]
+                """)
+        });
+
     static readonly Dictionary<string, ProcessGuide> BySlug = new()
     {
-        ["claim-workflow"] = ClaimWorkflow
+        ["claim-workflow"] = ClaimWorkflow,
+        ["policy-lifecycle"] = PolicyLifecycle
     };
 
     public static ProcessGuide? For(string slug) =>

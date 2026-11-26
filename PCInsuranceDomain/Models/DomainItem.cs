@@ -3,6 +3,7 @@ namespace PCInsuranceDomain.Models;
 public enum DomainCategory
 {
     BusinessEntity,
+    LineOfBusiness,
     Stakeholder
 }
 
@@ -20,7 +21,17 @@ public record DomainItem(
     IReadOnlyList<string> KeyTerms,
     IReadOnlyList<string> RelatedSlugs)
 {
-    public string CategoryLabel => Category == DomainCategory.BusinessEntity
-        ? "Business Entity"
-        : "Key Stakeholder";
+    public string CategoryLabel => Category switch
+    {
+        DomainCategory.BusinessEntity => "Business Entity",
+        DomainCategory.LineOfBusiness => "Line of Business",
+        _ => "Key Stakeholder"
+    };
+
+    public string ResponsibilitiesHeading => Category switch
+    {
+        DomainCategory.BusinessEntity => "What it does",
+        DomainCategory.LineOfBusiness => "What it covers",
+        _ => "What they do"
+    };
 }

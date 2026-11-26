@@ -54,13 +54,31 @@ public class DomainCatalogTests
     }
 
     [Test]
-    public void Both_categories_are_populated()
+    public void Every_category_is_populated()
     {
-        Assert.Multiple(() =>
+        var empty = Enum.GetValues<DomainCategory>().Where(c => !DomainCatalog.All.Any(i => i.Category == c));
+
+        Assert.That(empty, Is.Empty);
+    }
+
+    [Test]
+    public void Every_accent_has_a_css_class()
+    {
+        var css = File.ReadAllText(SiteCssPath());
+        var missing = DomainCatalog.All.Select(i => i.Accent).Distinct().Where(a => !css.Contains($".accent-{a} "));
+
+        Assert.That(missing, Is.Empty);
+    }
+
+    static string SiteCssPath()
+    {
+        for (var dir = new DirectoryInfo(TestContext.CurrentContext.TestDirectory); dir is not null; dir = dir.Parent)
         {
-            Assert.That(DomainCatalog.All.Count(i => i.Category == DomainCategory.BusinessEntity), Is.GreaterThan(0));
-            Assert.That(DomainCatalog.All.Count(i => i.Category == DomainCategory.Stakeholder), Is.GreaterThan(0));
-        });
+            var candidate = Path.Combine(dir.FullName, "PCInsuranceDomain", "wwwroot", "css", "site.css");
+            if (File.Exists(candidate))
+                return candidate;
+        }
+        throw new FileNotFoundException("site.css not found above the test directory");
     }
 
     [TestCase("policy")]
@@ -85,6 +103,9 @@ public class DomainCatalogTests
         {
             Assert.That(DomainCatalog.FindBySlug("claim-workflow")!.Category, Is.EqualTo(DomainCategory.BusinessEntity));
             Assert.That(DomainCatalog.FindBySlug("restoration-contractor")!.Category, Is.EqualTo(DomainCategory.Stakeholder));
+            Assert.That(DomainCatalog.FindBySlug("policy-lifecycle")!.Category, Is.EqualTo(DomainCategory.BusinessEntity));
+            Assert.That(DomainCatalog.FindBySlug("insurance-math")!.Category, Is.EqualTo(DomainCategory.BusinessEntity));
+            Assert.That(DomainCatalog.FindBySlug("homeowners")!.Category, Is.EqualTo(DomainCategory.LineOfBusiness));
         });
     }
 
@@ -95,6 +116,9 @@ public class DomainCatalogTests
         {
             Assert.That(DomainCatalog.FindBySlug("claim")!.RelatedSlugs, Does.Contain("claim-workflow"));
             Assert.That(DomainCatalog.FindBySlug("claims-vendors")!.RelatedSlugs, Does.Contain("restoration-contractor"));
+            Assert.That(DomainCatalog.FindBySlug("policy")!.RelatedSlugs, Does.Contain("policy-lifecycle"));
+            Assert.That(DomainCatalog.FindBySlug("premium")!.RelatedSlugs, Does.Contain("insurance-math"));
+            Assert.That(DomainCatalog.FindBySlug("coverage")!.RelatedSlugs, Does.Contain("homeowners"));
         });
     }
 
@@ -105,6 +129,7 @@ public class DomainCatalogTests
         {
             Assert.That(DomainCatalog.FindBySlug("policy")!.CategoryLabel, Is.EqualTo("Business Entity"));
             Assert.That(DomainCatalog.FindBySlug("insurer")!.CategoryLabel, Is.EqualTo("Key Stakeholder"));
+            Assert.That(DomainCatalog.FindBySlug("cyber")!.CategoryLabel, Is.EqualTo("Line of Business"));
         });
     }
 }
