@@ -18,7 +18,7 @@ public static class DomainCatalog
                 "Is changed over its life through endorsements and is renewed, cancelled, or non-renewed at term end."
             },
             new[] { "Declarations page", "Named insured", "Policy period", "Limit", "Deductible", "Cancellation / non-renewal" },
-            new[] { "coverage", "premium", "endorsement", "claim" }),
+            new[] { "coverage", "premium", "endorsement", "claim", "quote", "insured-risk" }),
 
         new("coverage", "Coverage", BusinessEntity, "🛡️",
             "The specific protections a policy provides and the perils it responds to.",
@@ -54,7 +54,7 @@ public static class DomainCatalog
                 "Ends with a settlement payment or a denial, and sometimes goes to litigation or appraisal."
             },
             new[] { "First notice of loss (FNOL)", "Loss date", "Coverage verification", "Settlement", "Subrogation", "Salvage", "Denial" },
-            new[] { "policy", "coverage", "reserve", "claims-adjuster" }),
+            new[] { "policy", "coverage", "reserve", "claims-adjuster", "loss-event", "third-party-claimant", "claims-vendors" }),
 
         new("reserve", "Reserve", BusinessEntity, "🏦",
             "The money an insurer sets aside to pay claims it expects to owe.",
@@ -79,6 +79,42 @@ public static class DomainCatalog
             },
             new[] { "Additional insured", "Rider", "Mid-term change", "Pro-rata premium" },
             new[] { "policy", "premium" }),
+
+        new("quote", "Quote", BusinessEntity, "📝",
+            "The insurer's priced offer of coverage before a policy is bound.",
+            "A quote is the insurer's priced offer of coverage in response to an application. The applicant supplies details about the risk, such as the property, drivers, or business operations. The underwriter uses those details to decide whether to offer terms, at what price, and with which limits and exclusions. A quote is valid for a limited time and becomes a policy only when the applicant accepts it and binds coverage.",
+            new[]
+            {
+                "Captures the application data that describes the risk being insured.",
+                "Carries a proposed premium, coverage limits, deductibles, and any conditions attached to the offer.",
+                "Becomes a bound policy when the applicant accepts and pays or commits to the first premium."
+            },
+            new[] { "Application", "Quote validity period", "Bind", "Indication", "Declination", "Subjectivity" },
+            new[] { "policy", "underwriter", "premium" }),
+
+        new("insured-risk", "Insured Risk", BusinessEntity, "🏠",
+            "The specific property, vehicle, or activity that the policy protects.",
+            "The insured risk is the object or exposure the policy is written to cover. In personal lines it is typically a home, a vehicle, or a personal liability exposure. In commercial lines it can be a building, a fleet, inventory, or a business operation. Each risk has characteristics such as location, construction, age, use, and occupancy. Those characteristics drive how likely a loss is and how much it could cost, so they are central to pricing and underwriting.",
+            new[]
+            {
+                "Identifies what is insured, such as a dwelling, vehicle, or business operation, and where it is located.",
+                "Holds risk characteristics like construction type, age, protection class, and vehicle use that feed rating.",
+                "Anchors claims, because a reported loss is checked against the insured property or activity named on the policy."
+            },
+            new[] { "Exposure", "Protection class", "Construction type", "Occupancy", "Replacement cost", "VIN" },
+            new[] { "policy", "coverage", "underwriter" }),
+
+        new("loss-event", "Loss Event", BusinessEntity, "💥",
+            "The actual incident that causes damage or injury, which may lead to one or more claims.",
+            "A loss event is the real-world occurrence that causes damage or injury, such as a fire, a collision, a storm, or a slip and fall. One loss event can produce several claims, for example a property claim and a liability claim from the same fire. Insurers record the date, cause, and location of each loss event, because the loss date decides which policy period and coverage apply. Tracking loss events also lets insurers spot patterns such as a hailstorm affecting many policyholders at once.",
+            new[]
+            {
+                "Records the date, time, location, and cause of the incident.",
+                "Determines which policy was in force and which coverage responds.",
+                "Groups related claims so catastrophe events and multi-claim incidents can be measured together."
+            },
+            new[] { "Date of loss", "Cause of loss", "Peril", "Occurrence", "Catastrophe (CAT) event", "Multiple claims per occurrence" },
+            new[] { "claim", "coverage", "policy" }),
 
         // ---------- Key stakeholders ----------
         new("policyholder", "Policyholder / Insured", Stakeholder, "🧑‍💼",
@@ -115,7 +151,7 @@ public static class DomainCatalog
                 "Pays claims, holds reserves, and manages capital to stay solvent."
             },
             new[] { "Combined ratio", "Loss ratio", "Expense ratio", "Solvency", "Admitted / surplus lines", "Line of business" },
-            new[] { "underwriter", "claims-adjuster", "reinsurer", "regulator" }),
+            new[] { "underwriter", "claims-adjuster", "reinsurer", "regulator", "rating-agency", "investors-shareholders" }),
 
         new("underwriter", "Underwriter", Stakeholder, "🔍",
             "The person who decides whether to accept a risk and what to charge for it.",
@@ -127,7 +163,7 @@ public static class DomainCatalog
                 "Monitors the portfolio and renews or non-renews policies."
             },
             new[] { "Submission", "Quote", "Bind", "Risk selection", "Adverse selection", "Authority limit" },
-            new[] { "policy", "premium", "insurer" }),
+            new[] { "policy", "premium", "insurer", "quote", "insured-risk" }),
 
         new("claims-adjuster", "Claims Adjuster", Stakeholder, "🔧",
             "The professional who investigates claims and determines what the insurer owes.",
@@ -151,7 +187,7 @@ public static class DomainCatalog
                 "Helps the primary insurer stay solvent after large or catastrophic events."
             },
             new[] { "Treaty", "Facultative", "Retention", "Cession", "Excess of loss", "Catastrophe reinsurance" },
-            new[] { "insurer", "premium", "actuary" }),
+            new[] { "insurer", "premium", "actuary", "rating-agency" }),
 
         new("regulator", "Regulator", Stakeholder, "⚖️",
             "The government body that oversees insurers to protect consumers and keep the market stable.",
@@ -175,7 +211,67 @@ public static class DomainCatalog
                 "Supports capital planning, reinsurance purchasing, and regulatory filings."
             },
             new[] { "Loss development", "Loss triangle", "Rate adequacy", "IBNR", "Catastrophe model" },
-            new[] { "premium", "reserve", "reinsurer" })
+            new[] { "premium", "reserve", "reinsurer" }),
+
+        new("third-party-claimant", "Third-Party Claimant", Stakeholder, "🚑",
+            "The injured person or damaged party who is not the policyholder but is owed compensation.",
+            "A third-party claimant is someone outside the policy who suffers injury or property damage because of the policyholder. For example, the driver of the other car in an accident, or a visitor who slips on the policyholder's property. Their claim is paid under the policyholder's liability coverage, not under their own policy. Third-party claims are often the most complex and expensive, because they can involve medical bills, lost income, and litigation.",
+            new[]
+            {
+                "Reports the injury or damage and provides evidence such as medical records or repair estimates.",
+                "Negotiates or litigates compensation against the policyholder's liability coverage.",
+                "Can bring a direct action against the insurer in some states, depending on local law."
+            },
+            new[] { "Bodily injury", "Property damage liability", "Demand letter", "Release", "Statute of limitations", "Settlement" },
+            new[] { "claim", "coverage", "claims-adjuster" }),
+
+        new("mortgagee-lienholder", "Mortgagee / Lienholder", Stakeholder, "🔑",
+            "The lender with a financial interest in insured property who must be protected by the policy.",
+            "A mortgagee is the bank or lender that holds a loan secured by the insured property. A lienholder is a party with a legal claim on a vehicle or other asset, usually because it financed the purchase. Their interest appears on the policy through a mortgage clause or loss payee clause. If the policyholder's claim is paid, the mortgagee is named on the check, because the lender's collateral must be restored or the loan repaid.",
+            new[]
+            {
+                "Is named on the policy so it receives notice of cancellation or non-renewal.",
+                "Is included on claim payments for damage to the collateral.",
+                "Can pay premium or force-place coverage if the borrower lets the policy lapse."
+            },
+            new[] { "Mortgage clause", "Loss payee", "Lien", "Force-placed insurance", "Collateral", "Escrow" },
+            new[] { "policy", "claim", "policyholder" }),
+
+        new("investors-shareholders", "Investors / Shareholders", Stakeholder, "📈",
+            "The owners of the insurer who expect a return on the capital they provide.",
+            "Investors and shareholders own the insurance company or fund it with capital. Because insurers collect premium before paying claims, they hold large pools of money, and investors care about how well that money is invested and managed. Shareholders judge the company by profitability, growth, and return on equity. Their expectations push management toward pricing discipline, reserve adequacy, and reinsurance decisions, sometimes in tension with the goal of stable, affordable coverage.",
+            new[]
+            {
+                "Provide the capital that backs the insurer's promise to pay claims.",
+                "Elect the board, which oversees management strategy and risk appetite.",
+                "Receive dividends or see share value change based on underwriting and investment results."
+            },
+            new[] { "Capital", "Return on equity", "Dividend", "Investment portfolio", "Surplus", "Board of directors" },
+            new[] { "insurer", "actuary", "reinsurer" }),
+
+        new("rating-agency", "Rating Agency", Stakeholder, "⭐",
+            "The independent firm that grades an insurer's financial strength and ability to pay claims.",
+            "Rating agencies such as A.M. Best, S&P Global, and Moody's assess an insurer's financial strength and its ability to meet policyholder obligations. The insurer's rating affects how agents, brokers, lenders, and large commercial buyers view it. A downgrade can make it harder to write new business or to attract reinsurance. Rating agencies review capital adequacy, reserve quality, reinsurance, and management, and they publish their opinions to the market.",
+            new[]
+            {
+                "Analyze the insurer's capital, reserves, reinsurance program, and operating performance.",
+                "Assign financial strength ratings that signal creditworthiness to the market.",
+                "Publish updates and outlooks, which can prompt insurers to strengthen capital or change strategy."
+            },
+            new[] { "Financial strength rating", "Outlook", "Downgrade", "Capital adequacy", "Risk-adjusted capital", "Issuer rating" },
+            new[] { "insurer", "reinsurer", "investors-shareholders" }),
+
+        new("claims-vendors", "Claims Vendors & Service Providers", Stakeholder, "🛠️",
+            "The repair shops, appraisers, and legal firms that help settle claims.",
+            "Claims vendors are the outside firms that insurers hire to repair property, value losses, and defend claims. They include auto body shops, restoration contractors, appraisers who value damaged property, medical reviewers, salvage yards, and defense attorneys. Their speed and quality shape how fast policyholders are made whole and how much the insurer pays. Insurers manage them through approved networks, pricing agreements, and performance reviews.",
+            new[]
+            {
+                "Repair or replace damaged property and report completion to the claims team.",
+                "Provide independent valuations, such as appraisals, medical reviews, or engineering reports.",
+                "Defend the policyholder or the insurer in litigation when a claim cannot be settled."
+            },
+            new[] { "Direct repair program", "Appraisal", "Salvage", "Defense counsel", "Vendor network", "Independent medical exam (IME)" },
+            new[] { "claim", "claims-adjuster", "third-party-claimant" })
     };
 
     public static DomainItem? FindBySlug(string slug) =>
