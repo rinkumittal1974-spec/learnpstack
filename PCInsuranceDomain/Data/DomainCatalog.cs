@@ -271,7 +271,19 @@ public static class DomainCatalog
                 "Defend the policyholder or the insurer in litigation when a claim cannot be settled."
             },
             new[] { "Direct repair program", "Appraisal", "Salvage", "Defense counsel", "Vendor network", "Independent medical exam (IME)" },
-            new[] { "claim", "claims-adjuster", "third-party-claimant" })
+            new[] { "claim", "claims-adjuster", "third-party-claimant", "restoration-contractor" }),
+
+        new("restoration-contractor", "Restoration Contractor", Stakeholder, "hammer", "blue",
+            "The specialist who stops further damage and rebuilds property after a covered loss.",
+            "Restoration contractors respond after water, fire, smoke, mold, or storm damage. They first mitigate the loss by extracting water, drying structures, boarding openings, and removing smoke residue, so the damage does not get worse. Then they clean, repair, and rebuild the property to its pre-loss condition. Policies require the insured to protect property from further damage, so restoration work often starts within hours of a loss, before the insurer has inspected it. Insurers and policyholders both rely on restoration contractors to keep repair costs and claim time under control.",
+            new[]
+            {
+                "Performs emergency mitigation, such as water extraction, drying, and board-up, to limit further damage.",
+                "Documents the work with moisture readings, photos, and drying logs that support the claim.",
+                "Prepares a scope of work and cost estimate, and submits supplements when hidden damage is found."
+            },
+            new[] { "Mitigation", "Water extraction", "Drying logs", "Scope of work", "Supplement", "Direction to pay", "Preferred vendor program" },
+            new[] { "claim", "claims-adjuster", "claims-vendors", "policyholder" })
     };
 
     public static DomainItem? FindBySlug(string slug) =>
