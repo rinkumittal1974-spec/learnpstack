@@ -54,7 +54,19 @@ public static class DomainCatalog
                 "Ends with a settlement payment or a denial, and sometimes goes to litigation or appraisal."
             },
             new[] { "First notice of loss (FNOL)", "Loss date", "Coverage verification", "Settlement", "Subrogation", "Salvage", "Denial" },
-            new[] { "policy", "coverage", "reserve", "claims-adjuster", "loss-event", "third-party-claimant", "claims-vendors" }),
+            new[] { "policy", "coverage", "reserve", "claims-adjuster", "loss-event", "third-party-claimant", "claims-vendors", "claim-workflow" }),
+
+        new("claim-workflow", "Claim Workflow", BusinessEntity, "signpost-split", "green",
+            "The end-to-end path a claim follows, from the moment damage happens to final closure.",
+            "The claim workflow is the sequence of steps an insurer and policyholder follow after a covered loss. It starts with the loss and first notice, moves through coverage checks, inspection, estimating, payment, repairs, and disputes, and ends with final settlement and records. Each stage has its own owner, timeframe, and rules, and many of them differ by state. The detail page walks through the full lifecycle for a home loss, with diagrams.",
+            new[]
+            {
+                "Sets the order of steps from loss to closure, so the policyholder and insurer know what happens next.",
+                "Defines the decision points where a claim is covered, denied, paid in part, or disputed.",
+                "Records each stage, so timeframes, payments, and reserves can be tracked and reported."
+            },
+            new[] { "First notice of loss", "Coverage verification", "Reservation of rights", "Actual cash value", "Replacement cost value", "Holdback", "Appraisal", "Subrogation", "Release" },
+            new[] { "claim", "policy", "claims-adjuster", "coverage" }),
 
         new("reserve", "Reserve", BusinessEntity, "bank", "teal",
             "The money an insurer sets aside to pay claims it expects to owe.",
