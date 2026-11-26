@@ -54,7 +54,19 @@ public static class DomainCatalog
                 "Ends with a settlement payment or a denial, and sometimes goes to litigation or appraisal."
             },
             new[] { "First notice of loss (FNOL)", "Loss date", "Coverage verification", "Settlement", "Subrogation", "Salvage", "Denial" },
-            new[] { "policy", "coverage", "reserve", "claims-adjuster", "loss-event", "third-party-claimant", "claims-vendors" }),
+            new[] { "policy", "coverage", "reserve", "claims-adjuster", "loss-event", "third-party-claimant", "claims-vendors", "claim-workflow" }),
+
+        new("claim-workflow", "Claim Workflow", BusinessEntity, "signpost-split", "green",
+            "The end-to-end path a claim follows, from the moment damage happens to final closure.",
+            "The claim workflow is the sequence of steps an insurer and policyholder follow after a covered loss. It starts with the loss and first notice, moves through coverage checks, inspection, estimating, payment, repairs, and disputes, and ends with final settlement and records. Each stage has its own owner, timeframe, and rules, and many of them differ by state. The detail page walks through the full lifecycle for a home loss, with diagrams.",
+            new[]
+            {
+                "Sets the order of steps from loss to closure, so the policyholder and insurer know what happens next.",
+                "Defines the decision points where a claim is covered, denied, paid in part, or disputed.",
+                "Records each stage, so timeframes, payments, and reserves can be tracked and reported."
+            },
+            new[] { "First notice of loss", "Coverage verification", "Reservation of rights", "Actual cash value", "Replacement cost value", "Holdback", "Appraisal", "Subrogation", "Release" },
+            new[] { "claim", "policy", "claims-adjuster", "coverage" }),
 
         new("reserve", "Reserve", BusinessEntity, "bank", "teal",
             "The money an insurer sets aside to pay claims it expects to owe.",
@@ -271,7 +283,19 @@ public static class DomainCatalog
                 "Defend the policyholder or the insurer in litigation when a claim cannot be settled."
             },
             new[] { "Direct repair program", "Appraisal", "Salvage", "Defense counsel", "Vendor network", "Independent medical exam (IME)" },
-            new[] { "claim", "claims-adjuster", "third-party-claimant" })
+            new[] { "claim", "claims-adjuster", "third-party-claimant", "restoration-contractor" }),
+
+        new("restoration-contractor", "Restoration Contractor", Stakeholder, "hammer", "blue",
+            "The specialist who stops further damage and rebuilds property after a covered loss.",
+            "Restoration contractors respond after water, fire, smoke, mold, or storm damage. They first mitigate the loss by extracting water, drying structures, boarding openings, and removing smoke residue, so the damage does not get worse. Then they clean, repair, and rebuild the property to its pre-loss condition. Policies require the insured to protect property from further damage, so restoration work often starts within hours of a loss, before the insurer has inspected it. Insurers and policyholders both rely on restoration contractors to keep repair costs and claim time under control.",
+            new[]
+            {
+                "Performs emergency mitigation, such as water extraction, drying, and board-up, to limit further damage.",
+                "Documents the work with moisture readings, photos, and drying logs that support the claim.",
+                "Prepares a scope of work and cost estimate, and submits supplements when hidden damage is found."
+            },
+            new[] { "Mitigation", "Water extraction", "Drying logs", "Scope of work", "Supplement", "Direction to pay", "Preferred vendor program" },
+            new[] { "claim", "claims-adjuster", "claims-vendors", "policyholder" })
     };
 
     public static DomainItem? FindBySlug(string slug) =>

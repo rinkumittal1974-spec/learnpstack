@@ -161,6 +161,20 @@ public static class RealWorldExamples
             E("Servpro and ServiceMaster Restore", "Water and fire restoration contractors."),
             E("Copart and IAA", "Salvage auction companies for total-loss vehicles."),
             E("Safelite", "A glass repair and replacement provider used in many auto programs.")
+        },
+        ["claim-workflow"] = new[]
+        {
+            E("EagleView aerial roof measurements", "Aerial roof reports that adjusters and contractors use to measure roof size and pitch."),
+            E("LexisNexis CLUE claims history", "The claim-history database that insurers check when they price or write a policy."),
+            E("Xactimate estimating", "Estimating software used to build line-item repair estimates for property claims."),
+            E("Hurricane and hail CAT response", "Catastrophe teams that handle claim surges after large storms, with extended hours and field staff.")
+        },
+        ["restoration-contractor"] = new[]
+        {
+            E("SERVPRO franchise network", "A franchised water, fire, and mold restoration network that many insurers use for emergency mitigation."),
+            E("ServiceMaster Restore", "A restoration brand that handles water, fire, and storm losses for homeowners and businesses."),
+            E("Paul Davis Restoration", "A franchised restoration company that handles fire, water, and storm damage repair."),
+            E("Direction to pay", "A document that lets the insurer pay the restoration contractor directly, instead of the policyholder.")
         }
     };
 
