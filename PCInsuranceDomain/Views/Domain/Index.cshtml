@@ -19,8 +19,8 @@
     @foreach (var item in entities)
     {
         <div class="col-12 col-sm-6 col-lg-4">
-            <a class="domain-tile" asp-controller="Domain" asp-action="Details" asp-route-id="@item.Slug">
-                <div class="tile-icon" aria-hidden="true">@item.Icon</div>
+            <a class="domain-tile accent-@item.Accent" asp-controller="Domain" asp-action="Details" asp-route-id="@item.Slug">
+                <div class="tile-icon" aria-hidden="true"><i class="bi bi-@item.Icon"></i></div>
                 <h3 class="tile-name h5">@item.Name</h3>
                 <p class="tile-tagline">@item.Tagline</p>
             </a>
@@ -34,8 +34,8 @@
     @foreach (var item in stakeholders)
     {
         <div class="col-12 col-sm-6 col-lg-4">
-            <a class="domain-tile" asp-controller="Domain" asp-action="Details" asp-route-id="@item.Slug">
-                <div class="tile-icon" aria-hidden="true">@item.Icon</div>
+            <a class="domain-tile accent-@item.Accent" asp-controller="Domain" asp-action="Details" asp-route-id="@item.Slug">
+                <div class="tile-icon" aria-hidden="true"><i class="bi bi-@item.Icon"></i></div>
                 <h3 class="tile-name h5">@item.Name</h3>
                 <p class="tile-tagline">@item.Tagline</p>
             </a>
