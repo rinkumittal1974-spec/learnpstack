@@ -1,0 +1,44 @@
+@using PCInsuranceDomain.Models
+@model IReadOnlyList<DomainItem>
+@{
+    var entities = Model.Where(i => i.Category == DomainCategory.BusinessEntity).ToList();
+    var stakeholders = Model.Where(i => i.Category == DomainCategory.Stakeholder).ToList();
+}
+
+<section class="text-center py-4">
+    <h1 class="display-6 fw-bold">Understanding the P&amp;C Insurance Domain</h1>
+    <p class="lead text-muted mb-0">
+        Property and casualty (P&amp;C) insurance covers losses to property and liability to others.
+        Select a tile to learn what it is and how it fits into the business.
+    </p>
+</section>
+
+<h2 class="section-title h4">Key Business Entities</h2>
+<p class="section-subtitle">The core objects that the business creates, tracks, and pays.</p>
+<div class="row g-3">
+    @foreach (var item in entities)
+    {
+        <div class="col-12 col-sm-6 col-lg-4">
+            <a class="domain-tile" asp-controller="Domain" asp-action="Details" asp-route-id="@item.Slug">
+                <div class="tile-icon" aria-hidden="true">@item.Icon</div>
+                <h3 class="tile-name h5">@item.Name</h3>
+                <p class="tile-tagline">@item.Tagline</p>
+            </a>
+        </div>
+    }
+</div>
+
+<h2 class="section-title h4">Key Stakeholders</h2>
+<p class="section-subtitle">The people and organizations that take part in insurance transactions.</p>
+<div class="row g-3">
+    @foreach (var item in stakeholders)
+    {
+        <div class="col-12 col-sm-6 col-lg-4">
+            <a class="domain-tile" asp-controller="Domain" asp-action="Details" asp-route-id="@item.Slug">
+                <div class="tile-icon" aria-hidden="true">@item.Icon</div>
+                <h3 class="tile-name h5">@item.Name</h3>
+                <p class="tile-tagline">@item.Tagline</p>
+            </a>
+        </div>
+    }
+</div>
